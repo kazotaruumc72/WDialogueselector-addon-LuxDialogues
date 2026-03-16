@@ -42,7 +42,7 @@ A Minecraft plugin addon that ensures each LuxDialogues dialogue targets a valid
 
 ### Target Format
 
-Each dialogue must specify a target using one of these formats:
+Each dialogue can specify one or multiple targets using these formats:
 
 | Format | Description | Example |
 |--------|-------------|---------|
@@ -52,33 +52,69 @@ Each dialogue must specify a target using one of these formats:
 | `nexo:item_id` | Nexo item (block or furniture) | `nexo:magic_statue_5` |
 | `fancynpcs:npc_name` | FancyNPCs entity | `fancynpcs:VillageTrader` |
 
+### Single vs Multiple Targets
+
+**Single Target** (use `target:`):
+```yaml
+dialogue_example:
+  target: 'nexo:magic_statue_5'
+  luxdialogues-id: 'greeting'
+```
+
+**Multiple Targets** (use `targets:` with a list):
+```yaml
+dialogue_example:
+  targets:
+    - 'nexo:magic_statue_5'
+    - 'nexo:magic_statue_6'
+    - 'fancynpcs:Merchant'
+  luxdialogues-id: 'greeting'
+```
+
+With multiple targets, the same dialogue will be available for all listed entities. This is useful for:
+- Sharing common dialogues across similar NPCs
+- Applying the same dialogue to multiple furniture pieces
+- Creating universal interactions that work with different entity types
+
 ### Example Configuration
 
 **dialogues.yml**:
 ```yaml
 dialogues:
+  # Single target (original format)
   dialogue_statue_1:
     target: 'nexo:magic_statue_5'
     luxdialogues-id: 'statue_greeting'
     description: 'Magic statue dialogue 1'
     enabled: true
 
-  dialogue_statue_2:
-    target: 'nexo:magic_statue_5'
+  # Multiple targets (NEW - same dialogue for multiple entities)
+  dialogue_multi_statue:
+    targets:
+      - 'nexo:magic_statue_5'
+      - 'nexo:magic_statue_6'
+      - 'nexo:magic_statue_7'
     luxdialogues-id: 'statue_quest'
-    description: 'Magic statue dialogue 2'
+    description: 'Quest dialogue for multiple statues'
     enabled: true
 
-  dialogue_boss_1:
-    target: 'mythicmobs:AncientGuardian'
-    luxdialogues-id: 'boss_taunt'
-    description: 'Boss dialogue before battle'
+  # Mixed target types
+  dialogue_boss_and_altar:
+    targets:
+      - 'mythicmobs:AncientGuardian'
+      - 'nexo-block:magic_altar'
+    luxdialogues-id: 'boss_altar_interaction'
+    description: 'Works on both boss and altar'
     enabled: true
 
-  dialogue_merchant_1:
-    target: 'fancynpcs:VillageTrader'
-    luxdialogues-id: 'merchant_greeting'
-    description: 'Village merchant dialogue'
+  # Multiple NPCs
+  dialogue_village_npcs:
+    targets:
+      - 'fancynpcs:VillageTrader'
+      - 'fancynpcs:VillageBlacksmith'
+      - 'fancynpcs:VillageInnkeeper'
+    luxdialogues-id: 'village_greeting'
+    description: 'Common greeting for village NPCs'
     enabled: true
 ```
 

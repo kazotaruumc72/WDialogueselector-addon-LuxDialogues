@@ -1,58 +1,82 @@
 # Example Dialogue Configuration
-# Each dialogue entry must specify a target from one of the supported plugins:
+# Each dialogue entry must specify one or more targets from the supported plugins:
 # - MythicMobs model (mythicmobs:ModelName)
 # - Nexo custom block (nexo-block:block_id or nexo:block_id)
 # - Nexo furniture (nexo-furniture:furniture_id or nexo:furniture_id)
 # - FancyNPCs entity (fancynpcs:npc_name)
 
+# You can use either:
+# - target: 'single_target'        (for a single target)
+# - targets: [target1, target2]    (for multiple targets)
+
 dialogues:
-  # Example with Nexo furniture (magic statue)
+  # Example with single target (backward compatible)
   dialogue_statue_1:
     target: 'nexo:magic_statue_5'
     luxdialogues-id: 'statue_greeting'
     description: 'Magic statue dialogue 1'
     enabled: true
 
+  # Example with multiple targets (NEW FEATURE)
+  dialogue_multi_statue:
+    targets:
+      - 'nexo:magic_statue_5'
+      - 'nexo:magic_statue_6'
+      - 'nexo:magic_statue_7'
+    luxdialogues-id: 'statue_quest'
+    description: 'Quest dialogue for multiple statues'
+    enabled: true
+
+  # Example with mixed target types (MythicMobs + Nexo)
+  dialogue_boss_and_altar:
+    targets:
+      - 'mythicmobs:AncientGuardian'
+      - 'nexo-block:magic_altar'
+    luxdialogues-id: 'boss_altar_interaction'
+    description: 'Dialogue that works on both boss and altar'
+    enabled: true
+
+  # Example with multiple NPCs
+  dialogue_village_npcs:
+    targets:
+      - 'fancynpcs:VillageTrader'
+      - 'fancynpcs:VillageBlacksmith'
+      - 'fancynpcs:VillageInnkeeper'
+    luxdialogues-id: 'village_greeting'
+    description: 'Common greeting for multiple village NPCs'
+    enabled: true
+
+  # Original single target examples (still supported)
   dialogue_statue_2:
     target: 'nexo:magic_statue_5'
-    luxdialogues-id: 'statue_quest'
+    luxdialogues-id: 'statue_lore'
     description: 'Magic statue dialogue 2'
     enabled: true
 
   dialogue_statue_3:
     target: 'nexo:magic_statue_5'
-    luxdialogues-id: 'statue_lore'
+    luxdialogues-id: 'statue_trade'
     description: 'Magic statue dialogue 3'
     enabled: true
 
-  dialogue_statue_4:
-    target: 'nexo:magic_statue_5'
-    luxdialogues-id: 'statue_trade'
-    description: 'Magic statue dialogue 4'
-    enabled: true
-
-  # Example with MythicMobs
   dialogue_boss_1:
     target: 'mythicmobs:AncientGuardian'
     luxdialogues-id: 'boss_taunt'
     description: 'Boss dialogue before battle'
     enabled: true
 
-  # Example with Nexo block
   dialogue_altar_1:
     target: 'nexo-block:magic_altar'
     luxdialogues-id: 'altar_activation'
     description: 'Magic altar interaction'
     enabled: true
 
-  # Example with FancyNPCs
   dialogue_merchant_1:
     target: 'fancynpcs:VillageTrader'
     luxdialogues-id: 'merchant_greeting'
     description: 'Village merchant dialogue'
     enabled: true
 
-  # Example with Nexo furniture (explicit)
   dialogue_throne_1:
     target: 'nexo-furniture:royal_throne'
     luxdialogues-id: 'throne_inspection'

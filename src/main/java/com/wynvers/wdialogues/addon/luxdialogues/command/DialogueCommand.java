@@ -85,8 +85,15 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
 
         for (DialogueEntry dialogue : plugin.getDialogueManager().getAllDialogues()) {
             String status = dialogue.isEnabled() ? ChatColor.GREEN + "✓" : ChatColor.RED + "✗";
+
+            // Show all targets
+            List<String> targets = dialogue.getTargets();
+            String targetDisplay = targets.size() == 1 ?
+                targets.get(0) :
+                targets.size() + " targets";
+
             sender.sendMessage(status + ChatColor.YELLOW + " " + dialogue.getId() +
-                    ChatColor.GRAY + " (" + dialogue.getTargetType() + ": " + dialogue.getTargetId() + ")");
+                    ChatColor.GRAY + " (" + targetDisplay + ")");
         }
     }
 
@@ -98,9 +105,20 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
         }
 
         sender.sendMessage(ChatColor.GOLD + "=== Dialogue Info: " + dialogueId + " ===");
-        sender.sendMessage(ChatColor.YELLOW + "Target: " + ChatColor.WHITE + dialogue.getTarget());
-        sender.sendMessage(ChatColor.YELLOW + "Target Type: " + ChatColor.WHITE + dialogue.getTargetType());
-        sender.sendMessage(ChatColor.YELLOW + "Target ID: " + ChatColor.WHITE + dialogue.getTargetId());
+
+        // Display all targets
+        List<String> targets = dialogue.getTargets();
+        if (targets.size() == 1) {
+            sender.sendMessage(ChatColor.YELLOW + "Target: " + ChatColor.WHITE + targets.get(0));
+        } else {
+            sender.sendMessage(ChatColor.YELLOW + "Targets (" + targets.size() + "):");
+            for (int i = 0; i < targets.size(); i++) {
+                DialogueEntry.TargetInfo info = dialogue.getTargetInfos().get(i);
+                sender.sendMessage(ChatColor.GRAY + "  " + (i + 1) + ". " + ChatColor.WHITE +
+                    targets.get(i) + ChatColor.GRAY + " (" + info.getType() + ")");
+            }
+        }
+
         sender.sendMessage(ChatColor.YELLOW + "LuxDialogues ID: " + ChatColor.WHITE + dialogue.getLuxDialoguesId());
         sender.sendMessage(ChatColor.YELLOW + "Description: " + ChatColor.WHITE + dialogue.getDescription());
         sender.sendMessage(ChatColor.YELLOW + "Enabled: " + ChatColor.WHITE + dialogue.isEnabled());
@@ -110,7 +128,7 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
         sender.sendMessage(ChatColor.YELLOW + "Validation:");
         var result = plugin.getDialogueManager().validateDialogue(dialogue);
         if (result.isValid()) {
-            sender.sendMessage(ChatColor.GREEN + "✓ Valid - " + result.getReason());
+            sender.sendMessage(ChatColor.GREEN + "✓ Valid - All targets are valid");
         } else {
             sender.sendMessage(ChatColor.RED + "✗ Invalid - " + result.getReason());
         }

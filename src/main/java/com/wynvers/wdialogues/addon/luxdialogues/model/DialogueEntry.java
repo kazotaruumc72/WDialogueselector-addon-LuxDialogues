@@ -1,29 +1,40 @@
 package com.wynvers.wdialogues.addon.luxdialogues.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * Represents a dialogue configuration with its target entity
+ * Represents a dialogue configuration with its target entity or entities
  */
 public class DialogueEntry {
 
     private final String id;
-    private final String target;
+    private final List<String> targets;
     private final String luxDialoguesId;
     private final String description;
     private final boolean enabled;
-    private final TargetType targetType;
-    private final String targetId;
+    private final List<TargetInfo> targetInfos;
 
-    public DialogueEntry(String id, String target, String luxDialoguesId, String description, boolean enabled) {
+    public DialogueEntry(String id, List<String> targets, String luxDialoguesId, String description, boolean enabled) {
         this.id = id;
-        this.target = target;
+        this.targets = new ArrayList<>(targets);
         this.luxDialoguesId = luxDialoguesId;
         this.description = description;
         this.enabled = enabled;
 
-        // Parse target type and ID
-        TargetInfo info = parseTarget(target);
-        this.targetType = info.type;
-        this.targetId = info.id;
+        // Parse all target types and IDs
+        this.targetInfos = new ArrayList<>();
+        for (String target : targets) {
+            this.targetInfos.add(parseTarget(target));
+        }
+    }
+
+    /**
+     * Constructor for backward compatibility with single target
+     */
+    public DialogueEntry(String id, String target, String luxDialoguesId, String description, boolean enabled) {
+        this(id, Collections.singletonList(target), luxDialoguesId, description, enabled);
     }
 
     private TargetInfo parseTarget(String target) {
@@ -57,8 +68,19 @@ public class DialogueEntry {
         return id;
     }
 
+    /**
+     * Get all targets for this dialogue
+     */
+    public List<String> getTargets() {
+        return Collections.unmodifiableList(targets);
+    }
+
+    /**
+     * Get the first target (for backward compatibility)
+     */
+    @Deprecated
     public String getTarget() {
-        return target;
+        return targets.isEmpty() ? "" : targets.get(0);
     }
 
     public String getLuxDialoguesId() {
@@ -73,22 +95,35 @@ public class DialogueEntry {
         return enabled;
     }
 
-    public TargetType getTargetType() {
-        return targetType;
+    /**
+     * Get all target info objects
+     */
+    public List<TargetInfo> getTargetInfos() {
+        return Collections.unmodifiableList(targetInfos);
     }
 
+    /**
+     * Get the type of the first target (for backward compatibility)
+     */
+    @Deprecated
+    public TargetType getTargetType() {
+        return targetInfos.isEmpty() ? TargetType.UNKNOWN : targetInfos.get(0).type;
+    }
+
+    /**
+     * Get the ID of the first target (for backward compatibility)
+     */
+    @Deprecated
     public String getTargetId() {
-        return targetId;
+        return targetInfos.isEmpty() ? "" : targetInfos.get(0).id;
     }
 
     @Override
     public String toString() {
         return "DialogueEntry{" +
                 "id='" + id + '\'' +
-                ", target='" + target + '\'' +
+                ", targets=" + targets +
                 ", luxDialoguesId='" + luxDialoguesId + '\'' +
-                ", targetType=" + targetType +
-                ", targetId='" + targetId + '\'' +
                 ", enabled=" + enabled +
                 '}';
     }
@@ -105,13 +140,24 @@ public class DialogueEntry {
         UNKNOWN
     }
 
-    private static class TargetInfo {
-        final TargetType type;
-        final String id;
+    /**
+     * Target information class
+     */
+    public static class TargetInfo {
+        public final TargetType type;
+        public final String id;
 
         TargetInfo(TargetType type, String id) {
             this.type = type;
             this.id = id;
+        }
+
+        public TargetType getType() {
+            return type;
+        }
+
+        public String getId() {
+            return id;
         }
     }
 }
