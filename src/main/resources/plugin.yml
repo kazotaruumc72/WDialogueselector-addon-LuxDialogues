@@ -1,0 +1,39 @@
+name: WDialogueselector-addon-LuxDialogues
+version: '${project.version}'
+main: com.wynvers.wdialogues.addon.luxdialogues.LuxDialoguesAddon
+api-version: '1.21'
+load: POSTWORLD
+author: Kazotaruu_
+description: LuxDialogues integration addon with MythicMobs, Nexo, and FancyNPCs target validation
+
+depend:
+  - LuxDialogues
+
+softdepend:
+  - MythicMobs
+  - Nexo
+  - FancyNpcs
+  - PlaceholderAPI
+
+commands:
+  luxdialogue:
+    description: Dialogue system commands
+    usage: /luxdialogue <reload|list|info|validate>
+    permission: luxdialogue.admin
+    aliases: [luxd, lxd]
+
+permissions:
+  luxdialogue.*:
+    description: All dialogue permissions
+    default: op
+    children:
+      luxdialogue.admin: true
+      luxdialogue.use: true
+
+  luxdialogue.admin:
+    description: Admin permissions
+    default: op
+
+  luxdialogue.use:
+    description: Use dialogue system
+    default: true
