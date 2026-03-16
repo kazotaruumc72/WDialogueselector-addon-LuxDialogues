@@ -36,8 +36,8 @@ nbdist/
 .DS_Store
 Thumbs.db
 
-# Libs (API JARs should not be committed)
-libs/
+# Libs (API JARs should not be committed, but allow README)
+libs/*.jar
 
 # Compiled class files
 *.class
