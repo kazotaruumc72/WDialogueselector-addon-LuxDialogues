@@ -167,14 +167,10 @@ git clone https://github.com/kazotaruumc72/WDialogueselector-addon-LuxDialogues.
 cd WDialogueselector-addon-LuxDialogues
 ```
 
-2. Create `libs` directory and add required API JARs:
-```bash
-mkdir libs
-# Add the following files to libs/:
-# - luxdialogues-api.jar
-# - nexo-api.jar
-# - fancynpcs-api.jar
-```
+2. **(Optional)** Replace stub JAR files with actual API JARs:
+   - The `libs/` directory contains stub JAR files for compilation
+   - For production use, replace these with actual API JARs (see `libs/README.md`)
+   - For development/testing, the stub files are sufficient for compilation
 
 3. Build the plugin:
 ```bash
@@ -273,8 +269,9 @@ dialogues:
 ### Issue: Build fails
 - Ensure Java 21 is installed: `java -version`
 - Check Maven version: `mvn -version`
-- Verify all API JARs are in `libs/` directory
-- See `libs/README.md` for required files
+- The `libs/` directory with stub JAR files is included in the repository
+- For production builds, replace stub JARs with actual API JARs (see `libs/README.md`)
+- If you get "Could not resolve dependencies" errors, ensure internet connectivity for Maven to download Paper, MythicMobs, and PlaceholderAPI dependencies
 
 ## API Usage (For Developers)
 
