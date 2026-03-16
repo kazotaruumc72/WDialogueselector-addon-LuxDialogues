@@ -120,6 +120,16 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
         }
 
         sender.sendMessage(ChatColor.YELLOW + "LuxDialogues ID: " + ChatColor.WHITE + dialogue.getLuxDialoguesId());
+
+        // Display all LuxDialogues IDs if there are multiple
+        if (dialogue.hasMultipleLuxDialoguesIds()) {
+            List<String> ids = dialogue.getLuxDialoguesIds();
+            sender.sendMessage(ChatColor.YELLOW + "LuxDialogues IDs (" + ids.size() + "):");
+            for (int i = 0; i < ids.size(); i++) {
+                sender.sendMessage(ChatColor.GRAY + "  " + (i + 1) + ". " + ChatColor.WHITE + ids.get(i));
+            }
+        }
+
         sender.sendMessage(ChatColor.YELLOW + "Description: " + ChatColor.WHITE + dialogue.getDescription());
         sender.sendMessage(ChatColor.YELLOW + "Enabled: " + ChatColor.WHITE + dialogue.isEnabled());
 
