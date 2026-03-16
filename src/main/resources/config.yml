@@ -1,0 +1,40 @@
+# WDialogueselector-addon-LuxDialogues Configuration
+# Each dialogue must target a valid entity from one of the supported plugins
+
+# Plugin Settings
+settings:
+  # Enable debug logging
+  debug: false
+
+  # Validation settings
+  validation:
+    # Require all dialogues to have valid targets
+    require-valid-targets: true
+    # Warn on startup about invalid targets
+    warn-on-invalid: true
+    # Prevent dialogue interaction if target is invalid
+    block-invalid-dialogues: true
+
+# Supported Target Prefixes
+# mythicmobs: - MythicMobs model
+# nexo-block: - Nexo custom block
+# nexo-furniture: - Nexo furniture
+# fancynpcs: - FancyNPCs entity
+target-prefixes:
+  mythicmobs: "mythicmobs:"
+  nexo-block: "nexo-block:"
+  nexo-furniture: "nexo-furniture:"
+  nexo-simple: "nexo:"  # Simplified format that works for both blocks and furniture
+  fancynpcs: "fancynpcs:"
+
+# Messages
+messages:
+  prefix: "&8[&6LuxDialogues&8] &r"
+  reload-success: "&aConfiguration reloaded successfully!"
+  reload-error: "&cError reloading configuration: {error}"
+  validation-started: "&eValidating dialogues..."
+  validation-complete: "&aValidation complete: {valid} valid, {invalid} invalid"
+  invalid-target: "&cDialogue &e{dialogue}&c has invalid target: &e{target}"
+  no-permission: "&cYou don't have permission to do that."
+  dialogue-loaded: "&aLoaded {count} dialogue(s) from configuration."
+  target-not-found: "&cTarget &e{target}&c not found in {plugin}."
