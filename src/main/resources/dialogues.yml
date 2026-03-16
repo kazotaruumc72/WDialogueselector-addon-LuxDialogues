@@ -82,3 +82,264 @@ dialogues:
     luxdialogues-id: 'throne_inspection'
     description: 'Royal throne examination'
     enabled: true
+
+  # Additional dialogue examples for various scenarios
+
+  # Quest-related dialogues
+  dialogue_quest_start:
+    target: 'fancynpcs:QuestGiver'
+    luxdialogues-id: 'quest_introduction'
+    description: 'Start a new quest from the quest giver'
+    enabled: true
+
+  dialogue_quest_progress:
+    target: 'fancynpcs:QuestGiver'
+    luxdialogues-id: 'quest_check_progress'
+    description: 'Check quest progress with quest giver'
+    enabled: true
+
+  dialogue_quest_complete:
+    target: 'fancynpcs:QuestGiver'
+    luxdialogues-id: 'quest_completion'
+    description: 'Complete quest and receive rewards'
+    enabled: true
+
+  # Shop and trading dialogues
+  dialogue_shop_weapons:
+    targets:
+      - 'fancynpcs:WeaponSmith'
+      - 'fancynpcs:ArmorSmith'
+    luxdialogues-id: 'shop_weapons_armor'
+    description: 'Browse weapons and armor shop'
+    enabled: true
+
+  dialogue_shop_potions:
+    target: 'fancynpcs:Alchemist'
+    luxdialogues-id: 'shop_potions'
+    description: 'Buy potions and elixirs'
+    enabled: true
+
+  dialogue_shop_magic:
+    target: 'fancynpcs:MagicShopkeeper'
+    luxdialogues-id: 'shop_enchantments'
+    description: 'Purchase magical items and enchantments'
+    enabled: true
+
+  # Dungeon and boss dialogues
+  dialogue_dungeon_entrance:
+    targets:
+      - 'nexo-block:dungeon_portal'
+      - 'nexo-furniture:dungeon_gate'
+    luxdialogues-id: 'dungeon_entry_warning'
+    description: 'Warning before entering dungeon'
+    enabled: true
+
+  dialogue_boss_phase1:
+    target: 'mythicmobs:DungeonBoss'
+    luxdialogues-id: 'boss_phase_one'
+    description: 'Boss dialogue at 75% health'
+    enabled: true
+
+  dialogue_boss_phase2:
+    target: 'mythicmobs:DungeonBoss'
+    luxdialogues-id: 'boss_phase_two'
+    description: 'Boss dialogue at 50% health'
+    enabled: true
+
+  dialogue_boss_defeat:
+    target: 'mythicmobs:DungeonBoss'
+    luxdialogues-id: 'boss_defeated'
+    description: 'Boss final words upon defeat'
+    enabled: true
+
+  # Lore and story dialogues
+  dialogue_lore_ancient_ruins:
+    targets:
+      - 'nexo:ancient_tablet_1'
+      - 'nexo:ancient_tablet_2'
+      - 'nexo:ancient_tablet_3'
+    luxdialogues-id: 'lore_ruins_history'
+    description: 'Learn about ancient ruins history'
+    enabled: true
+
+  dialogue_lore_guardian:
+    target: 'mythicmobs:AncientGuardian'
+    luxdialogues-id: 'guardian_story'
+    description: 'Guardian shares ancient knowledge'
+    enabled: true
+
+  dialogue_lore_statue:
+    targets:
+      - 'nexo:magic_statue_5'
+      - 'nexo:magic_statue_6'
+      - 'nexo:magic_statue_7'
+      - 'nexo:magic_statue_8'
+    luxdialogues-id: 'statue_prophecy'
+    description: 'Statues reveal prophecy'
+    enabled: true
+
+  # Town and city dialogues
+  dialogue_town_guard:
+    targets:
+      - 'fancynpcs:TownGuard1'
+      - 'fancynpcs:TownGuard2'
+      - 'fancynpcs:CityGuard'
+    luxdialogues-id: 'guard_patrol_chat'
+    description: 'Chat with town guards'
+    enabled: true
+
+  dialogue_town_elder:
+    target: 'fancynpcs:VillageElder'
+    luxdialogues-id: 'elder_wisdom'
+    description: 'Seek wisdom from the village elder'
+    enabled: true
+
+  dialogue_town_children:
+    targets:
+      - 'fancynpcs:Child1'
+      - 'fancynpcs:Child2'
+      - 'fancynpcs:Child3'
+    luxdialogues-id: 'children_play'
+    description: 'Play games with village children'
+    enabled: true
+
+  # Interactive furniture dialogues
+  dialogue_bookshelf_read:
+    targets:
+      - 'nexo-furniture:library_shelf_1'
+      - 'nexo-furniture:library_shelf_2'
+    luxdialogues-id: 'read_books'
+    description: 'Read books from bookshelf'
+    enabled: true
+
+  dialogue_crafting_table:
+    target: 'nexo-block:advanced_crafting_table'
+    luxdialogues-id: 'craft_special_items'
+    description: 'Craft special items'
+    enabled: true
+
+  dialogue_anvil_repair:
+    target: 'nexo-block:magic_anvil'
+    luxdialogues-id: 'repair_equipment'
+    description: 'Repair and upgrade equipment'
+    enabled: true
+
+  # Training and skill dialogues
+  dialogue_training_combat:
+    target: 'fancynpcs:CombatTrainer'
+    luxdialogues-id: 'learn_combat_skills'
+    description: 'Train combat abilities'
+    enabled: true
+
+  dialogue_training_magic:
+    target: 'fancynpcs:MageTeacher'
+    luxdialogues-id: 'learn_magic_spells'
+    description: 'Learn new magic spells'
+    enabled: true
+
+  dialogue_training_crafting:
+    target: 'fancynpcs:MasterCraftsman'
+    luxdialogues-id: 'learn_crafting'
+    description: 'Learn advanced crafting techniques'
+    enabled: true
+
+  # Event and seasonal dialogues
+  dialogue_event_festival:
+    targets:
+      - 'fancynpcs:FestivalOrganizer'
+      - 'nexo-furniture:festival_banner'
+    luxdialogues-id: 'festival_activities'
+    description: 'Participate in festival activities'
+    enabled: true
+
+  dialogue_event_tournament:
+    target: 'fancynpcs:TournamentMaster'
+    luxdialogues-id: 'tournament_registration'
+    description: 'Register for tournament'
+    enabled: true
+
+  # Teleportation and travel dialogues
+  dialogue_teleport_hub:
+    targets:
+      - 'nexo-block:teleport_pad_1'
+      - 'nexo-block:teleport_pad_2'
+      - 'nexo-block:teleport_pad_3'
+    luxdialogues-id: 'teleport_destination'
+    description: 'Choose teleportation destination'
+    enabled: true
+
+  dialogue_travel_caravan:
+    target: 'fancynpcs:CaravanMaster'
+    luxdialogues-id: 'travel_by_caravan'
+    description: 'Travel to distant lands'
+    enabled: true
+
+  # Bank and storage dialogues
+  dialogue_bank_deposit:
+    target: 'fancynpcs:Banker'
+    luxdialogues-id: 'bank_services'
+    description: 'Access bank services'
+    enabled: true
+
+  dialogue_storage_chest:
+    targets:
+      - 'nexo-furniture:storage_chest_large'
+      - 'nexo-furniture:storage_chest_small'
+    luxdialogues-id: 'personal_storage'
+    description: 'Access personal storage'
+    enabled: true
+
+  # Pet and companion dialogues
+  dialogue_pet_stable:
+    target: 'fancynpcs:StableMaster'
+    luxdialogues-id: 'manage_pets'
+    description: 'Manage your pets and mounts'
+    enabled: true
+
+  dialogue_pet_tamer:
+    target: 'fancynpcs:BeastTamer'
+    luxdialogues-id: 'tame_creature'
+    description: 'Learn to tame wild creatures'
+    enabled: true
+
+  # Mine and resource dialogues
+  dialogue_mine_foreman:
+    target: 'fancynpcs:MineForeman'
+    luxdialogues-id: 'mining_contract'
+    description: 'Accept mining contracts'
+    enabled: true
+
+  dialogue_ore_trader:
+    target: 'fancynpcs:OreTrader'
+    luxdialogues-id: 'sell_resources'
+    description: 'Sell ores and resources'
+    enabled: true
+
+  # Puzzle and mystery dialogues
+  dialogue_puzzle_door:
+    target: 'nexo-block:puzzle_door'
+    luxdialogues-id: 'solve_puzzle'
+    description: 'Solve puzzle to unlock door'
+    enabled: true
+
+  dialogue_mystery_npc:
+    target: 'fancynpcs:MysteriousStranger'
+    luxdialogues-id: 'cryptic_clues'
+    description: 'Receive cryptic clues'
+    enabled: true
+
+  # Guild and faction dialogues
+  dialogue_guild_master:
+    target: 'fancynpcs:GuildMaster'
+    luxdialogues-id: 'guild_recruitment'
+    description: 'Join a guild'
+    enabled: true
+
+  dialogue_faction_recruiter:
+    targets:
+      - 'fancynpcs:KnightRecruiter'
+      - 'fancynpcs:MageRecruiter'
+      - 'fancynpcs:RogueRecruiter'
+    luxdialogues-id: 'faction_choice'
+    description: 'Choose your faction'
+    enabled: true
