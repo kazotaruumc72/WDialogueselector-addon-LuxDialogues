@@ -9,12 +9,22 @@
 # - target: 'single_target'        (for a single target)
 # - targets: [target1, target2]    (for multiple targets)
 
+# You can also use comma-separated luxdialogues-id values to assign multiple dialogue IDs:
+# - luxdialogues-id: '1a, 1b, 1c, 1d'
+
 dialogues:
   # Example with single target (backward compatible)
   dialogue_statue_1:
     target: 'nexo:magic_statue_5'
     luxdialogues-id: 'statue_greeting'
     description: 'Magic statue dialogue 1'
+    enabled: true
+
+  # Example with multiple LuxDialogues IDs (NEW FEATURE)
+  dialogue_statue_multi_id:
+    target: 'nexo:magic_statue_5'
+    luxdialogues-id: '1a, 1b, 1c, 1d'
+    description: 'Magic statue first dialogue'
     enabled: true
 
   # Example with multiple targets (NEW FEATURE)

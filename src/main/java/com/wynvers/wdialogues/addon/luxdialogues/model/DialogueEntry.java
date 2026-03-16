@@ -12,6 +12,7 @@ public class DialogueEntry {
     private final String id;
     private final List<String> targets;
     private final String luxDialoguesId;
+    private final List<String> luxDialoguesIds;
     private final String description;
     private final boolean enabled;
     private final List<TargetInfo> targetInfos;
@@ -20,6 +21,19 @@ public class DialogueEntry {
         this.id = id;
         this.targets = new ArrayList<>(targets);
         this.luxDialoguesId = luxDialoguesId;
+
+        // Parse comma-separated luxdialogues IDs
+        this.luxDialoguesIds = new ArrayList<>();
+        if (luxDialoguesId != null && !luxDialoguesId.isEmpty()) {
+            String[] ids = luxDialoguesId.split(",");
+            for (String luxId : ids) {
+                String trimmed = luxId.trim();
+                if (!trimmed.isEmpty()) {
+                    this.luxDialoguesIds.add(trimmed);
+                }
+            }
+        }
+
         this.description = description;
         this.enabled = enabled;
 
@@ -85,6 +99,20 @@ public class DialogueEntry {
 
     public String getLuxDialoguesId() {
         return luxDialoguesId;
+    }
+
+    /**
+     * Get all LuxDialogues IDs as a list
+     */
+    public List<String> getLuxDialoguesIds() {
+        return Collections.unmodifiableList(luxDialoguesIds);
+    }
+
+    /**
+     * Check if this dialogue has multiple LuxDialogues IDs
+     */
+    public boolean hasMultipleLuxDialoguesIds() {
+        return luxDialoguesIds.size() > 1;
     }
 
     public String getDescription() {
