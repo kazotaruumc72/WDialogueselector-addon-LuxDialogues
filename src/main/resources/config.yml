@@ -6,6 +6,14 @@ settings:
   # Enable debug logging
   debug: false
 
+  # Selection mode for dialogues with multiple luxdialogues-id values
+  # Options: 'random' (pick a random ID) or 'sequential' (cycle through IDs in order per player)
+  selection-mode: random
+
+  # Command to execute when triggering a dialogue via fallback (if API is not available)
+  # Placeholders: {player} = player name, {id} = luxdialogues ID
+  dialogue-command: 'luxdialogues open {player} {id}'
+
   # Validation settings
   validation:
     # Require all dialogues to have valid targets
