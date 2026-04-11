@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Handles dialogue selection when a dialogue entry has multiple LuxDialogues IDs.
@@ -56,8 +57,7 @@ public class DialogueSelector {
      * Select a random ID from the list
      */
     private String selectRandom(List<String> ids) {
-        Random random = new Random();
-        return ids.get(random.nextInt(ids.size()));
+        return ids.get(ThreadLocalRandom.current().nextInt(ids.size()));
     }
 
     /**
