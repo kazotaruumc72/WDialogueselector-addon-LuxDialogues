@@ -20,6 +20,7 @@ public class LuxDialoguesAddon extends JavaPlugin {
     private static LuxDialoguesAddon instance;
     private IntegrationManager integrationManager;
     private DialogueManager dialogueManager;
+    private DialogueInteractionListener dialogueListener;
     private FileConfiguration dialoguesConfig;
     private boolean debugMode;
 
@@ -70,6 +71,9 @@ public class LuxDialoguesAddon extends JavaPlugin {
         if (dialogueManager != null) {
             dialogueManager.cleanup();
         }
+        if (dialogueListener != null) {
+            dialogueListener.getDialogueSelector().cleanup();
+        }
         getLogger().info("WDialogueselector-addon-LuxDialogues has been disabled!");
     }
 
@@ -82,7 +86,9 @@ public class LuxDialoguesAddon extends JavaPlugin {
     }
 
     private void registerListeners() {
-        getServer().getPluginManager().registerEvents(new DialogueInteractionListener(this), this);
+        DialogueInteractionListener listener = new DialogueInteractionListener(this);
+        getServer().getPluginManager().registerEvents(listener, this);
+        this.dialogueListener = listener;
         debug("Registered event listeners");
     }
 

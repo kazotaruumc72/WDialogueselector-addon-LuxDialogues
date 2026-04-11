@@ -12,6 +12,7 @@ import java.util.List;
 public class IntegrationManager {
 
     private final LuxDialoguesAddon plugin;
+    private LuxDialoguesIntegration luxDialoguesIntegration;
     private MythicMobsIntegration mythicMobsIntegration;
     private NexoIntegration nexoIntegration;
     private FancyNpcsIntegration fancyNpcsIntegration;
@@ -22,6 +23,20 @@ public class IntegrationManager {
 
     public void initialize() {
         plugin.debug("Initializing integrations...");
+
+        // Initialize LuxDialogues integration
+        try {
+            this.luxDialoguesIntegration = new LuxDialoguesIntegration(plugin);
+            this.luxDialoguesIntegration.initialize();
+            if (luxDialoguesIntegration.isEnabled()) {
+                plugin.getLogger().info("LuxDialogues API integration enabled!");
+            } else {
+                plugin.debug("LuxDialogues API not accessible via reflection - dialogue triggering will use commands");
+            }
+        } catch (Exception e) {
+            plugin.getLogger().warning("Failed to initialize LuxDialogues integration: " + e.getMessage());
+            this.luxDialoguesIntegration = null;
+        }
 
         // Initialize MythicMobs integration
         if (Bukkit.getPluginManager().getPlugin("MythicMobs") != null) {
@@ -78,6 +93,14 @@ public class IntegrationManager {
 
     public boolean isFancyNpcsAvailable() {
         return fancyNpcsIntegration != null && fancyNpcsIntegration.isEnabled();
+    }
+
+    public boolean isLuxDialoguesAvailable() {
+        return luxDialoguesIntegration != null && luxDialoguesIntegration.isEnabled();
+    }
+
+    public LuxDialoguesIntegration getLuxDialoguesIntegration() {
+        return luxDialoguesIntegration;
     }
 
     public MythicMobsIntegration getMythicMobsIntegration() {

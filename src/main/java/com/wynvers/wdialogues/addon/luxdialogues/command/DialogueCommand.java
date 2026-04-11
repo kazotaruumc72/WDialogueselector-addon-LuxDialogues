@@ -159,9 +159,14 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
     private void handleIntegrations(CommandSender sender) {
         sender.sendMessage(ChatColor.GOLD + "=== Plugin Integrations ===");
 
+        boolean luxDialogues = plugin.getIntegrationManager().isLuxDialoguesAvailable();
         boolean mythicMobs = plugin.getIntegrationManager().isMythicMobsAvailable();
         boolean nexo = plugin.getIntegrationManager().isNexoAvailable();
         boolean fancyNpcs = plugin.getIntegrationManager().isFancyNpcsAvailable();
+
+        sender.sendMessage((luxDialogues ? ChatColor.GREEN + "✓" : ChatColor.YELLOW + "~") +
+                ChatColor.YELLOW + " LuxDialogues API" +
+                (luxDialogues ? "" : ChatColor.GRAY + " (using command fallback)"));
 
         sender.sendMessage((mythicMobs ? ChatColor.GREEN + "✓" : ChatColor.RED + "✗") +
                 ChatColor.YELLOW + " MythicMobs");
@@ -179,6 +184,10 @@ public class DialogueCommand implements CommandExecutor, TabCompleter {
 
         sender.sendMessage((fancyNpcs ? ChatColor.GREEN + "✓" : ChatColor.RED + "✗") +
                 ChatColor.YELLOW + " FancyNpcs");
+
+        String selectionMode = plugin.getConfig().getString("settings.selection-mode", "random");
+        sender.sendMessage("");
+        sender.sendMessage(ChatColor.YELLOW + "Selection Mode: " + ChatColor.WHITE + selectionMode);
     }
 
     private void sendHelp(CommandSender sender) {
